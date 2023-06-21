@@ -54,6 +54,7 @@ import com.android.systemui.shade.ShadeController;
 import com.android.systemui.shade.ShadeControllerImpl;
 import com.android.systemui.shade.ShadeExpansionStateManager;
 import com.android.systemui.statusbar.CommandQueue;
+import com.android.systemui.statusbar.events.StatusBarEventsModule;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
 import com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl;
 import com.android.systemui.statusbar.NotificationShadeWindowController;
@@ -101,7 +102,8 @@ import dagger.Lazy;
         ReferenceScreenshotModule.class,
         StartCentralSurfacesGoogleModule.class,
         VolumeModule.class,
-        SmartspaceGoogleModule.class
+        SmartspaceGoogleModule.class,
+        StatusBarEventsModule.class,
 })
 public abstract class SystemUIGoogleModule {
 

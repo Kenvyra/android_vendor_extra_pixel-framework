@@ -26,6 +26,7 @@ import android.os.PowerManager;
 import android.service.dreams.IDreamManager;
 import android.util.DisplayMetrics;
 
+import android.hardware.fingerprint.FingerprintManager;
 import com.android.internal.jank.InteractionJankMonitor;
 import com.android.internal.logging.MetricsLogger;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -48,16 +49,19 @@ import com.android.systemui.keyguard.KeyguardUnlockAnimationController;
 import com.android.systemui.keyguard.KeyguardViewMediator;
 import com.android.systemui.keyguard.ScreenLifecycle;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
+import com.android.systemui.keyguard.domain.interactor.AlternateBouncerInteractor;
 import com.android.systemui.keyguard.ui.viewmodel.LightRevealScrimViewModel;
 import com.android.systemui.navigationbar.NavigationBarController;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.PluginDependencyProvider;
 import com.android.systemui.plugins.PluginManager;
+import com.android.systemui.settings.UserTracker;
 import com.android.systemui.recents.ScreenPinningRequest;
 import com.android.systemui.settings.brightness.BrightnessSliderController;
 import com.android.systemui.shade.CameraLauncher;
 import com.android.systemui.shade.ShadeController;
 import com.android.systemui.shade.ShadeExpansionStateManager;
+import com.android.systemui.shade.QuickSettingsController;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.KeyguardIndicationController;
 import com.android.systemui.statusbar.LockscreenShadeTransitionController;
@@ -101,6 +105,7 @@ import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 
 import dagger.Lazy;
 
@@ -201,6 +206,9 @@ public class CentralSurfacesGoogle extends CentralSurfacesImpl {
             WiredChargingRippleController wiredChargingRippleController,
             IDreamManager dreamManager,
             Lazy<CameraLauncher> cameraLauncherLazy,
+            AlternateBouncerInteractor alternateBouncerInteractor,
+            UserTracker userTracker,
+            Provider<FingerprintManager> fingerprintManagerProvider,
             Lazy<LightRevealScrimViewModel> lightRevealScrimViewModelLazy,
             WallpaperNotifier wallpaperNotifier,
             SmartSpaceController smartSpaceController,
@@ -233,7 +241,7 @@ public class CentralSurfacesGoogle extends CentralSurfacesImpl {
                 featureFlags, keyguardUnlockAnimationController, delayableExecutor,
                 messageRouter, wallpaperManager, startingSurfaceOptional, activityLaunchAnimator,
                 jankMonitor, deviceStateManager, wiredChargingRippleController,
-                dreamManager, cameraLauncherLazy, lightRevealScrimViewModelLazy, tunerService);
+                dreamManager, cameraLauncherLazy, lightRevealScrimViewModelLazy, alternateBouncerInteractor, userTracker, fingerprintManagerProvider, tunerService);
         mWallpaperNotifier = wallpaperNotifier;
         mSmartSpaceController = smartSpaceController;
         mNotificationLockscreenUserManagerGoogle = notificationLockscreenUserManagerGoogle;
