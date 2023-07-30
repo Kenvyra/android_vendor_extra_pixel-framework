@@ -28,6 +28,7 @@ import androidx.annotation.Nullable;
 
 import com.android.internal.logging.UiEventLogger;
 import com.android.keyguard.KeyguardViewController;
+import com.android.systemui.battery.BatterySaverModule;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.controls.controller.ControlsTileResourceConfiguration;
 import com.android.systemui.dagger.SysUISingleton;
@@ -106,7 +107,8 @@ import dagger.Lazy;
         SmartspaceGoogleModule.class,
         StatusBarEventsModule.class,
         AospPolicyModule.class,
-        RotationLockModule.class
+        RotationLockModule.class,
+        BatterySaverModule.class
 })
 public abstract class SystemUIGoogleModule {
 
